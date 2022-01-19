@@ -1,13 +1,21 @@
 <script>
+import FirstComponent from '@/components/FirstComponent.vue';
+import Modal from '@/components/Modal.vue';
 
 export default {
   name: "App",
 
+  components: {
+    FirstComponent,
+    Modal
+  },
+
   data: () => ({
     show: false,
     kilometers: false,
+    opened: false,
     model: {
-      cm: '1000000',
+      cm: '12321',
       meter: '',
     }
   }),
@@ -36,22 +44,34 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
       this.show = true;
       this.$nextTick(() => {
         this.$refs.input.focus();
       })
-    },1000);
   },
+
+  methods: {
+    openDialog() {
+      this.opened = true;
+    }
+  }
 };
 </script>
 
 
 <template>
   <div id="app">
-    <input ref="input" v-model="model.cm" v-if="show" type="text" placeholder="cm">
+    <input ref="input" type="text" v-model="model.cm" v-if="show"  placeholder="cm">
     <input :value="meters" v-if="show" type="text" placeholder="m">
     <input :value="km" v-if="kilometers && show" type="text" placeholder="km">
+    <first-component :km="km" v-model="model.cm" />
+    <modal v-model="opened">
+      <template #button>
+        <button>
+          close
+        </button>
+      </template>
+    </modal>
   </div>
 </template>
 
