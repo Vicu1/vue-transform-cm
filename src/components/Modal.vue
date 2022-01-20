@@ -27,6 +27,9 @@ export default {
     close() {
       this.model = false;
       this.$emit("input", this.model);
+    },
+    openModal() {
+      this.model = true;
     }
   }
 }
@@ -34,7 +37,7 @@ export default {
 
 <template>
   <div>
-    <slot name="button"></slot>
+    <slot name="button" :activator="openModal"></slot>
     <div class="modalDialog" v-if="model">
       <button class="close" @click="close()">
         <img src="../assets/close.png" alt="close">

@@ -1,13 +1,17 @@
 <script>
 import FirstComponent from '@/components/FirstComponent.vue';
 import Modal from '@/components/Modal.vue';
+import Tabs from '@/components/Tabs.vue';
+import Carousel from "@/components/Carousel";
 
 export default {
   name: "App",
 
   components: {
     FirstComponent,
-    Modal
+    Modal,
+    Tabs,
+    Carousel
   },
 
   data: () => ({
@@ -15,7 +19,7 @@ export default {
     kilometers: false,
     opened: false,
     model: {
-      cm: '12321',
+      cm: '',
       meter: '',
     }
   }),
@@ -66,12 +70,14 @@ export default {
     <input :value="km" v-if="kilometers && show" type="text" placeholder="km">
     <first-component :km="km" v-model="model.cm" />
     <modal v-model="opened">
-      <template #button>
-        <button>
-          close
+      <template #button="{ activator }">
+        <button @click="activator()">
+          Open
         </button>
       </template>
     </modal>
+    <tabs/>
+    <carousel/>
   </div>
 </template>
 
