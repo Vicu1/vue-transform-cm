@@ -3,6 +3,7 @@ import FirstComponent from '@/components/FirstComponent.vue';
 import Modal from '@/components/Modal.vue';
 import Tabs from '@/components/Tabs.vue';
 import Carousel from "@/components/Carousel";
+import Table from "@/components/Table.vue";
 
 export default {
   name: "App",
@@ -11,7 +12,8 @@ export default {
     FirstComponent,
     Modal,
     Tabs,
-    Carousel
+    Carousel,
+    Table
   },
 
   data: () => ({
@@ -78,6 +80,7 @@ export default {
     </modal>
     <tabs/>
     <carousel/>
+    <Table/>
   </div>
 </template>
 

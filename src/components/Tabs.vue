@@ -10,7 +10,7 @@ export default {
 
   data: () => ({
     tabsTitle: [...new Array(25)],
-    activeTab: 0
+    activeTab: 0,
   }),
 
   methods: {

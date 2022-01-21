@@ -7,52 +7,65 @@ export default {
     model: {
       buttonView: false,
     },
-    currentSlide: 0
+    currentSlide: 1,
+    dots__active: "",
   }),
 
   methods: {
-    buttons() {
+    showButtons() {
       this.model.buttonView = true;
     },
     removeButtons() {
       this.model.buttonView = false;
     },
-    nextSlide(){
-      if (this.currentSlide < this.carouselItems.length){
-      this.currentSlide++;
-      }else if (this.currentSlide === this.carouselItems.length){
-        this.currentSlide = 0;
+    nextSlide() {
+      if (this.currentSlide < this.carouselItems.length) {
+        this.currentSlide++;
+      } else if (this.currentSlide === this.carouselItems.length) {
+        this.currentSlide = 1;
       }
     },
-    prevSlide(){
-      if (this.currentSlide !== 0){
+    prevSlide() {
+      if (this.currentSlide !== 1) {
         this.currentSlide--;
-      }else if (this.currentSlide === 0){
+      } else if (this.currentSlide === 1) {
         this.currentSlide = this.carouselItems.length;
       }
-    }
-  }
+    },
+    changeSlide(index) {
+      this.currentSlide = index + 1;
+    },
+  },
 }
 </script>
 
 <template>
   <div>
-    <div class="carousel"
+    <div
+        class="carousel"
         @mouseleave="removeButtons()"
-        @mouseover="buttons()">
-      <div :class="{ 'display-none': index !== currentSlide }" v-for="(slide, index) of carouselItems" :key="index"
-           style="position:absolute;"></div>
-      <button @click="prevSlide()" v-if="model.buttonView" class="prev">prev</button>
+        @mouseover="showButtons()"
+    >
+      <div
+          v-for="(_, index) of carouselItems"
+          :key="index"
+          :class="{ 'display-none': index !== currentSlide }"
+          style="position: absolute;">
+      </div>
+      <button v-if="model.buttonView" class="prev" @click="prevSlide()">prev</button>
       <h2>
         Slide {{ currentSlide }}
       </h2>
-      <button @click="nextSlide()" v-if="model.buttonView" class="next">next</button>
+      <button v-if="model.buttonView" class="next" @click="nextSlide()">next</button>
       <div class="dots__block">
-        <button class="dots" v-for="dot of carouselItems" :key="dot">
-
+        <button
+            v-for="(dots, index)  of carouselItems"
+            :key="dots"
+            :class="{ 'dots__active': index + 1 === currentSlide }"
+            class="dots"
+            @click="changeSlide(index)">
         </button>
       </div>
-
     </div>
   </div>
 </template>
@@ -90,19 +103,26 @@ export default {
   border: 1px solid #fff;
   border-radius: 50%;
   width: 10px;
-  height: 10px;
+  height: 13px;
   cursor: pointer;
   margin: 0 5px;
 }
-.dots__block{
+
+.dots__block {
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
 }
-.dots:hover{
+
+.dots:hover {
   background-color: black;
 }
+
+.dots__active {
+  background-color: black;
+}
+
 h2 {
   margin: 0;
   display: flex;
