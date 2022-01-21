@@ -6,9 +6,9 @@ export default {
     value_title: '',
     value_price: '',
     tableItems: [
-      {title: 'Bread', price: 2 , },
-      {title: 'Milk', price: 4 , },
-      {title: 'Snickers', price: 6 , }
+      {title: 'Bread', price: 2  },
+      {title: 'Milk', price: 4  },
+      {title: 'Snickers', price: 6 }
 
     ],
   }),
@@ -21,7 +21,7 @@ export default {
 
   methods: {
     addItem() {
-      if (this.value_title && this.value_price){
+      if (this.value_title && this.value_price && this.value_price > 0){
         this.tableItems.push({title: this.value_title, price: Number(this.value_price)});
         this.value_title = '';
         this.value_price = '';
