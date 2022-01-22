@@ -38,7 +38,7 @@ export default {
 <template>
   <div>
     <input v-model="value_title" placeholder="Name" type="text">
-    <input v-model="value_price" placeholder="Price ($)" type="number">
+    <input v-model="value_price" min="1" placeholder="Price ($)" type="number">
     <button @click="addItem()">
       Add Item
     </button>
@@ -84,7 +84,7 @@ div {
 
 .table-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 50px;
 }
 
 </style>
